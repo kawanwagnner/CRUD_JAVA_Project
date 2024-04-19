@@ -89,6 +89,29 @@ public class GerenciadorDeUsers {
 		}
 
 	}
+	
+	public void editarSenha(int id, String novaSenha) {
+		List<Usuario> usuarios = lerUsuarios();
+		boolean find = false;
+		
+		for (Usuario usuario : usuarios) {
+			if (usuario.getId() == id) {
+				System.out.println("Usuário: " + usuario.getNome());
+				
+				usuario.setSenha(novaSenha);
+				find = true;
+				break;
+			}
+		}
+		
+		if (find) {
+			reescreverArquivo(usuarios);
+			System.out.println("Usuário editado com sucesso!");
+		} else {
+			System.err.println("Usuário não encontrado! :(");
+		}
+		
+	}
 
 	public void reescreverArquivo(List<Usuario> usuarios) {
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(NOME_ARQUIVO))) {

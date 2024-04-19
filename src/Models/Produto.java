@@ -3,57 +3,68 @@ package Models;
 import java.util.Scanner;
 
 import Service.HandleMenu;
+import Service.HandleMenuProduto;
 
-public class Usuario {
-	// rastreio / identificador
-	private int id;
-
+public class Produto {
+	private long id;
 	private String nome;
-	private String senha;
-	
-	public Usuario(int id, String nome, String senha) {
+	private double preco;
+	private int qtd;
+
+	public Produto(long id, String nome, double preco, int qtd) {
+		super();
 		this.id = id;
 		this.nome = nome;
-		this.senha = senha;
+		this.preco = preco;
+		this.qtd = qtd;
 	}
 	
-	public Usuario() {}
-	
-	public int getId() {
+	public Produto() {}
+
+	public long getId() {
 		return id;
 	}
-	
-	public void setId(int id) {
+
+	public void setId(long id) {
 		this.id = id;
 	}
-	
+
 	public String getNome() {
 		return nome;
 	}
-	
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
-	public String getSenha() {
-		return senha;
+
+	public double getPreco() {
+		return preco;
 	}
-	
-	public void setSenha(String senha) {
-		this.senha = senha;
+
+	public void setPreco(double preco) {
+		this.preco = preco;
+	}
+
+	public int getQtd() {
+		return qtd;
+	}
+
+	public void setQtd(int qtd) {
+		this.qtd = qtd;
 	}
 
 	@Override
 	public String toString() {
-		return id + ";" + nome + ";" + senha;
+		return id + ";" + nome + ";" + preco + ";" + qtd;
 	}
 	
-	public void systemUser() {
+	public void systemProduct() {
 		Scanner input = new Scanner(System.in);
-		HandleMenu hm = new HandleMenu();
+		HandleMenuProduto hm = new HandleMenuProduto();
 		int escolha = 0;
+
 		do {
-			System.out.println("1 - Criar User \n2 - Editar User \n3 - Deletar User \n4 - Listar User \n5 - Detalhes User \n6 - Login User \n7 - Alterar Senha \n10 - Sair\n");
+			System.out.println("1 - Criar Produto \n2 - Editar Produto \n3 - Deletar Produto \n4 - Listar Produto \n5 - Detalhes Produto \n6 - Calc. Preços \n7 - Calc. QTDs \n10 - Sair\n");
 			escolha = input.nextInt();
 
 			switch (escolha) {
@@ -78,11 +89,11 @@ public class Usuario {
 				break;
 			}
 			case 6: {
-				hm.login();
+				hm.calcular();
 				break;
 			}
 			case 7: {
-				hm.AlterarSenha();
+				hm.calcularQTD();
 				break;
 			}
 			case 10: {
@@ -93,8 +104,8 @@ public class Usuario {
 				break;
 			}
 		} while (escolha != 9);
-		
+
 		input.close();
+
 	}
-	
 }

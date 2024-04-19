@@ -64,13 +64,49 @@ public class HandleMenu {
 	public void login() {
 		System.out.println("Fazendo Login... ");
 		System.out.println("");
-		
+
 		System.out.println("Digite seu nome: ");
 		String nome = input.next();
-		
+
 		System.out.println("Digite sua senha: ");
 		String senha = input.next();
 		gs.loginUsuario(nome, senha);
+	}
+
+	public void AlterarSenha() {
+		List<Usuario> usuarios = gs.lerUsuarios();
+		System.out.println("");
+		System.out.println("Alterando sua senha...");
+		System.out.println("");
+
+		System.out.println("Digite o ID do Usuário a ser editado: ");
+		int id = input.nextInt();
+
+		System.out.println("Para começar, digite sua antiga senha: ");
+		String oldPassword = input.next();
+
+		boolean passwordIsCorrect = false;
+
+		for (Usuario usuario : usuarios) {
+
+			if (oldPassword.equals(usuario.getSenha())) {
+				passwordIsCorrect = true;
+			}
+		}
+
+		if (passwordIsCorrect) {
+			System.out.println("Sua senha: " + oldPassword + ". Está correta! Por favor...");
+			System.out.println("");
+
+			System.out.println("Digite a nova senha: ");
+			String senha = input.next();
+
+			gs.editarSenha(id, senha);
+
+		} else {
+			System.err.println("Infelizmente sua senha está incorreta, corrija-a e tente novamente... :(");
+		}
+
 	}
 
 	private int getNextId() {
